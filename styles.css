@@ -84,6 +84,18 @@ h1 {
   font-size: 0.85rem;
 }
 
+.cmd {
+  display: block;
+  background: #0b0d11;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  color: var(--accent);
+  overflow-x: auto;
+}
+
 footer {
   margin-top: 48px;
   text-align: center;

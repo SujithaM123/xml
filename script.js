@@ -13,3 +13,4 @@ async function showSize(url, elementId) {
 
 showSize("xml-toolkit.zip", "size-toolkit");
 showSize("benchmark.zip", "size-benchmark");
+showSize("xml-toolkit.txt", "size-text");

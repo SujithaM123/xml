@@ -35,3 +35,8 @@ showTotalSize(
   ["benchmark.txt.part001", "benchmark.txt.part002", "benchmark.txt.part003", "benchmark.txt.part004"],
   "size-benchmark-text"
 );
+showTotalSize(
+  ["xml-full.txt.zip.part001", "xml-full.txt.zip.part002", "xml-full.txt.zip.part003"],
+  "size-xml-full"
+);
+showSize("benchmark-full.txt.zip", "size-benchmark-full");

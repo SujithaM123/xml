@@ -49,7 +49,8 @@ def pack(root: Path, output: Path, excludes: set) -> int:
             rel_str = rel.as_posix()
 
             try:
-                content = f.read_text(encoding="utf-8")
+                with f.open("r", encoding="utf-8", newline="") as fh:
+                    content = fh.read()
             except (UnicodeDecodeError, ValueError):
                 data = f.read_bytes()
                 b64 = base64.b64encode(data).decode("ascii")
@@ -70,9 +71,10 @@ def main():
     parser.add_argument("source", nargs="?", default=".", help="Folder to pack (default: current directory)")
     parser.add_argument("output", nargs="?", default="codebase.txt", help="Output text file (default: codebase.txt)")
     parser.add_argument("--exclude", action="append", default=[], help="Extra folder/file names to exclude (repeatable)")
+    parser.add_argument("--all", action="store_true", help="Include everything, ignoring the default excludes (.git, node_modules, build/, etc.)")
     args = parser.parse_args()
 
-    excludes = DEFAULT_EXCLUDES | set(args.exclude)
+    excludes = (set() if args.all else DEFAULT_EXCLUDES) | set(args.exclude)
     root = Path(args.source)
     output = Path(args.output)
 

@@ -48,6 +48,26 @@
         <span class="meta" id="size-benchmark-text"></span>
         <code class="cmd">python unpack_codebase.py benchmark.txt benchmark</code>
       </article>
+
+      <article class="card full">
+        <h2>xml — entire codebase, zero exclusions (text, zipped)</h2>
+        <p>Every single file from the original archive — node_modules, build output, generated samples, everything — packed to text (binary files auto base64-encoded) and zip-compressed for a much smaller download. Split into 3 parts to stay under GitHub's 100MB limit. Download all parts plus the script; it reassembles the parts, unzips, and restores every file to its original path and extension automatically.</p>
+        <a class="button" href="xml-full.txt.zip.part001" download>Download part 1</a>
+        <a class="button" href="xml-full.txt.zip.part002" download>Download part 2</a>
+        <a class="button" href="xml-full.txt.zip.part003" download>Download part 3</a>
+        <a class="button" href="unpack_codebase.py" download>Download unpack_codebase.py</a>
+        <span class="meta" id="size-xml-full"></span>
+        <code class="cmd">python unpack_codebase.py xml-full.txt.zip xml-full</code>
+      </article>
+
+      <article class="card full">
+        <h2>benchmark — entire codebase, zero exclusions (text, zipped)</h2>
+        <p>Every file from the original archive, including compiled .class/.jar build output, packed to text and zip-compressed. Fits in one file (under GitHub's limit) &mdash; no splitting needed.</p>
+        <a class="button" href="benchmark-full.txt.zip" download>Download benchmark-full.txt.zip</a>
+        <a class="button" href="unpack_codebase.py" download>Download unpack_codebase.py</a>
+        <span class="meta" id="size-benchmark-full"></span>
+        <code class="cmd">python unpack_codebase.py benchmark-full.txt.zip benchmark-full</code>
+      </article>
     </section>
 
     <footer>

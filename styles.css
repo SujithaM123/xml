@@ -43,6 +43,10 @@ h1 {
   gap: 20px;
 }
 
+.card.full {
+  grid-column: 1 / -1;
+}
+
 .card {
   background: var(--panel);
   border: 1px solid var(--border);

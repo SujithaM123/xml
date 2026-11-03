@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:com="urn:test:import-ref-common"
+           xmlns="urn:test:import-ref-main"
+           targetNamespace="urn:test:import-ref-main"
+           elementFormDefault="qualified">
+  <xs:import namespace="urn:test:import-ref-common" schemaLocation="import-ref-common.xsd"/>
+  <xs:element name="Document">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="com:PersonName"/>
+        <xs:element name="Age" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

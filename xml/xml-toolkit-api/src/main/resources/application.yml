@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 200MB
+
+app:
+  allowed-base-folders: []
+  data-dir: xml-toolkit-api-data
+  max-upload-bytes: 52428800

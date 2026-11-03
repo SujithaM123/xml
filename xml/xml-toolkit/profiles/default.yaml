@@ -1,0 +1,9 @@
+# Default name-based value generation rules for seev/supl ISO 20022 corporate action messages.
+# Pass with: --profile xml-toolkit/profiles/default.yaml
+#
+# Each entry maps an element's local name to a value rule:
+#   xpath  -- a path to another element of the same message (e.g. /Document/CorpActnGnlInf),
+#             for fields that NAME a location in the message rather than a person or place.
+# Anything not listed here falls back to the generator's ordinary name-based/type-based rules.
+rules:
+  PlcAndNm: xpath

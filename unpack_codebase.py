@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
-"""Reconstruct a directory tree from a text file created by pack_codebase.py."""
+"""Reconstruct a directory tree from a text file created by pack_codebase.py.
+
+Also handles codebases split into numbered parts (e.g. codebase.txt.part001,
+codebase.txt.part002, ...) by auto-detecting and concatenating them when the
+plain input file isn't found.
+"""
 import argparse
 import base64
+import glob
 import re
 from pathlib import Path
 
@@ -16,11 +22,26 @@ def is_safe_rel_path(rel_path: str) -> bool:
     return ".." not in p.parts
 
 
+def load_text(input_path: Path) -> str:
+    if input_path.is_file():
+        return input_path.read_text(encoding="utf-8")
+
+    parts = sorted(glob.glob(f"{input_path}.part*"))
+    if not parts:
+        raise SystemExit(f"Not a file, and no parts found matching '{input_path}.part*': {input_path}")
+
+    print(f"Reassembling {len(parts)} parts: {', '.join(Path(p).name for p in parts)}")
+    chunks = []
+    for part in parts:
+        chunks.append(Path(part).read_text(encoding="utf-8"))
+    return "".join(chunks)
+
+
 def unpack(input_file: Path, dest: Path) -> int:
     dest = dest.resolve()
     dest.mkdir(parents=True, exist_ok=True)
 
-    text = input_file.read_text(encoding="utf-8")
+    text = load_text(input_file)
     lines = text.split("\n")
 
     count = 0
@@ -66,11 +87,7 @@ def main():
     parser.add_argument("dest", nargs="?", default="unpacked", help="Destination folder (default: unpacked)")
     args = parser.parse_args()
 
-    input_file = Path(args.input)
-    if not input_file.is_file():
-        raise SystemExit(f"Not a file: {input_file}")
-
-    count = unpack(input_file, Path(args.dest))
+    count = unpack(Path(args.input), Path(args.dest))
     print(f"Unpacked {count} files into '{Path(args.dest).resolve()}'")
 
 
